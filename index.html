@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="js/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		console.log("It Works");
+		$.ajax({
+      		type:'GET',
+      		url:'http://iligtas.ph/gcmsg/displaymsg.php',
+      		dataType: "html",  
+      		data: {},
+      			success:function(data) {
+        			if(data) {   
+            				$('#divMsg').html(data);
+        			} else {
+      				}
+    			}
+   		});
+		//start new ajax
+		$('#btnSubmit').click(function(){
+			$.ajax({
+      			type:'POST',
+      			url:'http://iligtas.ph/gcmsg/addmsg.php',
+      			dataType: "html",  
+      			data: $('#frmAddMsg').serialize(),
+      			success:function(data) {
+        			if(data) {   
+            				alert(data);
+        			} else {
+      				}
+    			}
+   		});
+
+		});	
+	});
+</script>
+</head>
+<body>
+<div class="jumbotron">
+<h1>GC Message Board</h1>
+</div>
+<div id="divMsg">
+	Loading... Please Wait...<br/>
+	<progress></progress>
+</div>
+<div class="form">
+	<form id="frmAddMsg" class="form">
+	<input type="text" id="txtUsername" name="txtUsername" placeholder="Username" /><br>
+	<input type="text" id="txtMsg" name="txtMsg" placeholder="Enter Message" />
+	</form>
+	<button class="btn btn-alert btn-lg" id="btnSubmit">SUBMIT</button>
+</div>
+</body>
+</html>
